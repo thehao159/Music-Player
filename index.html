@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Player</title>
+
+    <!-- Normalize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="./assets/css/base.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+</head>
+<body>
+    <div class="main">
+        <!-- Header -->
+        <header>
+            <div class="header__song">Song</div>
+            <div class="header__singer">Singer</div>
+        </header>
+        <!-- End Header -->
+
+        <!-- CD -->
+        <div class="cd">
+            <div class="cd__outline">
+                <div class="cd__img" style="background-image: url('./assets/imgs/cd.jpg');"></div>
+            </div>
+        </div>
+        <!-- End CD -->
+
+        <!-- Slider -->
+        <div class="slider">
+            <input type="range" class="slider__progress slider__progress--clicked" value="0" step="1" min="0" max="100">
+        </div>
+        <!-- End Slider -->
+
+        <!-- Audio -->
+        <audio id="" src=""></audio>
+        <!-- End Audio -->
+
+        <!-- Control -->
+        <div class="control">
+            <button class="control__shuffle control__btn control__sm-btn control__btn--actived">
+                <i class="fa-solid fa-shuffle control__icon"></i>
+            </button>
+            <button class="control__prev control__btn control__sm-btn">
+                <i class="fa-solid fa-backward-step control__icon"></i>
+            </button>
+            <button class="control__play-stop control__btn">
+                <i class="fa-solid fa-play control__l-icon control__icon--selected"></i>
+                <i class="fa-solid fa-pause control__l-icon"></i>
+            </button>
+            <button class="control__next control__btn control__sm-btn">
+                <i class="fa-solid fa-forward-step control__icon"></i>
+            </button>
+            <button class="control__repeat control__btn control__sm-btn">
+                <i class="fa-solid fa-repeat control__icon"></i>
+            </button>
+        </div>
+        <!-- End Control -->
+
+        <!-- Playlists -->
+        <div class="playlists">
+            <span>All Songs</span>
+            <div class="song__list">
+                <div class="song__item">
+                    <div class="song__avatar">
+                        <div class="song__avatar-img" style="background-image: url('./assets/imgs/cd.jpg');"></div>
+                    </div>
+                    <div class="song__info">
+                        <div class="song__name">Song</div>
+                        <div class="song__singer">Singer</div>
+                        <div class="song__time">00:00</div>
+                    </div>
+                    <div class="song__status">
+                        <div class="song__btn">
+                            <i class="fa-solid fa-play song__icon song__play-icon"></i>
+                            <i class="fa-solid fa-pause song__icon song__pause-icon"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Playlists -->
+    </div>
+</body>
+</html>

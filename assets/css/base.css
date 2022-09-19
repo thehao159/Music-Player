@@ -1,0 +1,68 @@
+:root {
+    --mode-dark: #1f1d1d;
+    --theme-light: #d53434;
+    --theme-dark: #4f1459;
+    --text-light: #fff;
+    --text-blur: #ccc
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+}
+
+.main {
+    margin: 2% auto 0;
+    padding: 2rem 10rem 0;
+    border-radius: 20px;
+    min-width: 600px;
+    background-color: var(--mode-dark);
+    color: var(--text-light);
+}
+
+/* Control */
+.control__btn {
+    margin-top: 10px;
+    border: none;
+    border-radius: 50%;
+    color: var(--text-light);
+    cursor: pointer;
+}
+
+.control__sm-btn {
+    width: 4.4rem;
+    height: 4.4rem;
+    background: var(--theme-dark);
+}
+
+.control__sm-btn:hover,
+.control__btn--actived {
+    background: #b428cd;
+}
+
+.control__icon {
+    font-size: 1.4rem;
+}
+
+.control__l-icon {
+    display: none;
+    font-size: 2.8rem;
+}
+
+.control__icon--selected {
+    display: block;
+}
+
+/* End Control */
