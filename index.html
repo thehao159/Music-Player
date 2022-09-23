@@ -18,75 +18,77 @@
 </head>
 <body>
     <div class="main">
-        <!-- Header -->
-        <header>
-            <div class="header__song">Song</div>
-            <div class="header__singer">Singer</div>
-        </header>
-        <!-- End Header -->
-
-        <!-- CD -->
-        <div class="cd">
-            <div class="cd__outline">
-                <div class="cd__img" style="background-image: url('./assets/imgs/cd.jpg');"></div>
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <!-- Header -->
+            <header>
+                <div class="header__song"></div>
+                <div class="header__singer"></div>
+            </header>
+            <!-- End Header -->
+    
+            <!-- CD -->
+            <div class="cd">
+                <div class="cd__outline">
+                    <div class="cd__img"></div>
+                </div>
             </div>
+            <!-- End CD -->
+    
+            <!-- Slider -->
+            <div class="slider">
+                <input type="range" class="slider__progress" value="0" step="1" min="0" max="1000">
+            </div>
+            <!-- End Slider -->
+    
+            <!-- Audio -->
+            <audio id="audio" src=""></audio>
+            <!-- End Audio -->
+    
+            <!-- Control -->
+            <div class="control">
+                <button class="control__shuffle control__btn control__sm-btn control__btn--actived">
+                    <i class="fa-solid fa-shuffle control__icon"></i>
+                </button>
+                <button class="control__prev control__btn control__sm-btn">
+                    <i class="fa-solid fa-backward-step control__icon"></i>
+                </button>
+                <button class="control__main control__btn">
+                    <i class="fa-solid fa-play control__l-icon control__play-icon"></i>
+                    <i class="fa-solid fa-pause control__l-icon control__pause-icon"></i>
+                </button>
+                <button class="control__next control__btn control__sm-btn">
+                    <i class="fa-solid fa-forward-step control__icon"></i>
+                </button>
+                <button class="control__repeat control__btn control__sm-btn">
+                    <i class="fa-solid fa-repeat control__icon"></i>
+                </button>
+            </div>
+            <!-- End Control -->
         </div>
-        <!-- End CD -->
-
-        <!-- Slider -->
-        <div class="slider">
-            <input type="range" class="slider__progress slider__progress--clicked" value="0" step="1" min="0" max="100">
-        </div>
-        <!-- End Slider -->
-
-        <!-- Audio -->
-        <audio id="" src=""></audio>
-        <!-- End Audio -->
-
-        <!-- Control -->
-        <div class="control">
-            <button class="control__shuffle control__btn control__sm-btn control__btn--actived">
-                <i class="fa-solid fa-shuffle control__icon"></i>
-            </button>
-            <button class="control__prev control__btn control__sm-btn">
-                <i class="fa-solid fa-backward-step control__icon"></i>
-            </button>
-            <button class="control__play-stop control__btn">
-                <i class="fa-solid fa-play control__l-icon control__icon--selected"></i>
-                <i class="fa-solid fa-pause control__l-icon"></i>
-            </button>
-            <button class="control__next control__btn control__sm-btn">
-                <i class="fa-solid fa-forward-step control__icon"></i>
-            </button>
-            <button class="control__repeat control__btn control__sm-btn">
-                <i class="fa-solid fa-repeat control__icon"></i>
-            </button>
-        </div>
-        <!-- End Control -->
+        <!-- End Dashboard -->
 
         <!-- Playlists -->
         <div class="playlists">
             <span>All Songs</span>
             <div class="song__list">
-                <div class="song__item">
-                    <div class="song__avatar">
-                        <div class="song__avatar-img" style="background-image: url('./assets/imgs/cd.jpg');"></div>
-                    </div>
-                    <div class="song__info">
-                        <div class="song__name">Song</div>
-                        <div class="song__singer">Singer</div>
-                        <div class="song__time">00:00</div>
-                    </div>
-                    <div class="song__status">
-                        <div class="song__btn">
-                            <i class="fa-solid fa-play song__icon song__play-icon"></i>
-                            <i class="fa-solid fa-pause song__icon song__pause-icon"></i>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <!-- End Playlists -->
     </div>
+
+    <script>
+        const $ = document.querySelector.bind(document);
+        const $$ = document.querySelectorAll.bind(document);
+
+        const dashboard = $('.dashboard');
+        const audio = $('#audio');
+        const progress = $('.slider__progress');
+
+        var currentIndex = 0;
+        var isPause = true;
+    </script>
+    
+    <script type="module" src="./assets/js/app.js"></script>
 </body>
 </html>
