@@ -209,7 +209,7 @@ header {
     background-color: #5e5d5d;
 }
 
-.song__btn--pause {
+.song__btn--playing {
     background-color: var(--theme-light);
 }
 
@@ -222,5 +222,13 @@ header {
 
 .song__pause-icon {
     display: none;
+}
+
+.song__btn--playing .song__play-icon {
+    display: none;
+}
+
+.song__btn--playing .song__pause-icon {
+    display: block;
 }
 /* End Playlists */

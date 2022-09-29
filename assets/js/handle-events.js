@@ -1,71 +1,183 @@
+import handleRenderDashboard from './render-dashboard.js';
+import { NUMBER_OF_SONGS } from './get-data.js';
+
 // Functions
-function appPlay() {
-    isPause = false;
-    dashboard.classList.add('playing');
-}
-
-function appPause() {
-    isPause = true;
-    dashboard.classList.remove('playing');
-}
-
-function progressToPercent(currentTime, duration) {
+// Tính phần trăm theo tiến độ
+function timeToPercent(currentTime, duration) {
     return Math.floor(currentTime * 100 / duration);
 }
 
+// Từ tiến độ quy đổi phần trăm
 function percentToTime(percent, duration) {
     return Math.floor(percent * duration / 100);
 }
 
+// Thay đổi tiến độ của bài hát trên thanh progress
 function changeProgressSlider(currentTime, progressPercent) {
     progress.value = progressPercent * 10;
     progress.style.setProperty('--background-gradient', `linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) ${progressPercent}%, #494545 ${progressPercent}%, #494545 100%)`);
     progress.style.setProperty('--content-after', `'${Math.floor(currentTime / 60)}:${Math.floor(currentTime % 60).toString().padStart(2, '0')}'`);
 }
 
+// Chuyển bài hát tiếp theo (thay đổi index và thay đổi bàt hát)
+function nextSong() {
+    currentIndex++;
+    if(currentIndex >= NUMBER_OF_SONGS) {
+        currentIndex = 0;
+    }
+    handleRenderDashboard(currentIndex);
+}
+
+// Chuyển bài hát lùi về (thay đổi index và thay đổi bàt hát)
+function prevSong() {
+    currentIndex--;
+    if(currentIndex < 0) {
+        currentIndex = NUMBER_OF_SONGS - 1;
+    }
+    handleRenderDashboard(currentIndex);
+}
+
+// Bài hát ngẫu nhiên
+function randomSong() {
+    let randomNumber = currentIndex;
+
+    while (randomNumber === currentIndex) {
+        randomNumber = Math.floor(Math.random() * NUMBER_OF_SONGS);
+    }
+    currentIndex = randomNumber;
+    handleRenderDashboard(currentIndex);
+}
+
 // Handle events
 function handleControlbtn() {
-    // Main btn
+    // Nút Play/Stop (play chạy, stop dừng)
     $('.control__main').addEventListener('click', () => {
-        if(isPause) {
-            audio.play();
-        } else {
+        if(isPlaying) {
             audio.pause();
+        } else {
+            audio.play();
         }
+    });
+
+    // Nút Next (chạy bài kế)
+    nextBtn.addEventListener('click', () => {
+        if(isRandom) {
+            randomSong();
+        } else {
+            nextSong();
+        }
+        audio.play();
+    });
+
+    // Nút Previous (chạy bài trước)
+    $('.control__prev').addEventListener('click', () => {
+        if(isRandom) {
+            randomSong();
+        } else {
+            prevSong();
+        }
+        audio.play();
+    });
+
+    // Nút random (bật / tắt random)
+    randomBtn.addEventListener('click', () => {
+        isRandom = !isRandom;
+        randomBtn.classList.toggle('control__btn--actived', isRandom);
+    });
+
+    // Nút lặp (bật / tắt lặp)
+    loopBtn.addEventListener('click', () => {
+        isLoop = !isLoop;
+        loopBtn.classList.toggle('control__btn--actived', isLoop);
+        audio.loop = isLoop;
     });
 }
 
 function handleAudio() {
     let duration = 0;
 
+    // Xử lý quay cd
+    const spinnerCdAnimation = cdOutline.animate(
+        [
+            {transform: 'rotate(360deg)'}
+        ],
+        {
+            duration: 20000, // thời lượng 1 vòng
+            iterations: Infinity // số vòng lặp
+        }
+    );
+    spinnerCdAnimation.pause();
+
+    // Bỏ hết btn trong playlist đang có playing
+    // Chuyển btn playing cho bài hát phù hợp ở playlist
+    // Lấy thời lượng bài hiện tại render lên dashboard, cho cd về ban đầu
     audio.onloadeddata = () => {
+        const playingBtn = $('.song__btn--playing');
+        
+        if(playingBtn) playingBtn.classList.remove('song__btn--playing');
+        $$('.song__item')[currentIndex].querySelector('.song__btn').classList.add('song__btn--playing');
+        
+        spinnerCdAnimation.currentTime = 0;
+        
         duration = audio.duration;
         progress.style.setProperty('--content-before', `'${Math.floor(duration / 60)}:${Math.floor(duration % 60).toString().padStart(2, '0')}'`);
     };
+    
+    // Thay đổi trạng thái play và dashboard ở trạng thái play
+    audio.onplay = () => {
+        isPlaying = true;
+        dashboard.classList.add('playing');
+        spinnerCdAnimation.play();
+    };
 
-    audio.onplay = appPlay;
+    // Thay đổi trạng thái pause và dashboard ở trạng thái pause
+    audio.onpause = () => {
+        isPlaying = false;
+        dashboard.classList.remove('playing');
+        spinnerCdAnimation.pause();
+    };
 
-    audio.onpause = appPause;
-
+    // Khi audio ở trạng thái chạy thì thay đổi thanh progress
     audio.ontimeupdate = () => {
         const currentTime = audio.currentTime;
 
         if(duration) {
-            const progressPercent =  progressToPercent(currentTime, duration);
+            const progressPercent =  timeToPercent(currentTime, duration);
             changeProgressSlider(currentTime, progressPercent);
+        }
+    };
+    
+    // Khi hết bài kt loop, nếu không thì auto next
+    audio.onended = () => {
+        if(!isLoop) {
+            nextBtn.click();
         }
     };
 }
 
 function handleSlider() {
-    let currentIsPause = false;
+    let currentIsPlaying = true;
+    
+    function holdThumb() {
+        currentIsPlaying = isPlaying;
+        audio.pause();
+    }
 
+    function releaseThumb() {
+        if(currentIsPlaying){
+            audio.play();
+        }
+    }
+
+    // Khi giữ nút tua
     progress.onmousedown = holdThumb;
     progress.ontouchstart = holdThumb;
 
+    // Khi thả nút tua
     progress.onmouseup = releaseThumb;
     progress.ontouchend = releaseThumb;
     
+    // Khi kéo nút tua thay đổi giá trị của input và thanh progress
     progress.oninput = () => {
         const rangeLength = progress.value / 10;
         const currentTime = percentToTime(rangeLength, audio.duration);
@@ -73,18 +185,6 @@ function handleSlider() {
         audio.currentTime = currentTime;
         changeProgressSlider(currentTime, rangeLength);
     };
-
-    function holdThumb() {
-        currentIsPause = isPause;
-        audio.pause();
-    }
-
-    function releaseThumb() {
-        if(!currentIsPause){
-            appPlay();
-            audio.play();
-        }
-    }
 }
 
 function handleEvents() {

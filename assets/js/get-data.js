@@ -7,3 +7,5 @@ export function getAllSongs() {
 export function getSong(index) {
     return songs[index];
 };
+
+export const NUMBER_OF_SONGS = songs.length;

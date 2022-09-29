@@ -47,7 +47,7 @@
     
             <!-- Control -->
             <div class="control">
-                <button class="control__shuffle control__btn control__sm-btn control__btn--actived">
+                <button class="control__shuffle control__btn control__sm-btn">
                     <i class="fa-solid fa-shuffle control__icon"></i>
                 </button>
                 <button class="control__prev control__btn control__sm-btn">
@@ -84,9 +84,15 @@
         const dashboard = $('.dashboard');
         const audio = $('#audio');
         const progress = $('.slider__progress');
+        const cdOutline = $('.cd__outline');
+        const nextBtn = $('.control__next');
+        const randomBtn = $('.control__shuffle');
+        const loopBtn = $('.control__repeat');
 
-        var currentIndex = 0;
-        var isPause = true;
+        let currentIndex = 0;
+        let isPlaying = false;;
+        let isRandom = false;
+        let isLoop = false;
     </script>
     
     <script type="module" src="./assets/js/app.js"></script>

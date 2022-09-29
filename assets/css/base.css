@@ -28,7 +28,7 @@ body {
     margin: 0 auto;
     padding: 2rem 10rem 0;
     border-radius: 20px;
-    min-width: 600px;
+    max-width: 600px;
     background-color: var(--mode-dark);
     color: var(--text-light);
 }
@@ -54,6 +54,7 @@ body {
 }
 
 .control__icon {
+    background: transparent;
     font-size: 1.4rem;
 }
 
