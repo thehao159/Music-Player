@@ -187,10 +187,23 @@ function handleSlider() {
     };
 }
 
+function handlePlaylist() {
+    // Ấn ngẫu nhiên bài hát nào đó thì sẽ chuyển index của bài đó
+    // thành currentIndex và render lên dashboard
+    $$('.song__item').forEach((element, index) => {
+        element.addEventListener('click', () => {
+            currentIndex = index;
+            handleRenderDashboard(currentIndex);
+            audio.play();
+        });
+    });
+}
+
 function handleEvents() {
     handleControlbtn();
     handleAudio();
     handleSlider();
+    handlePlaylist();
 }
 
 export default handleEvents;
