@@ -29,6 +29,8 @@ body {
     padding: 2rem 10rem 0;
     border-radius: 20px;
     max-width: 600px;
+    width: 100%;
+    min-height: 100vh;
     background-color: var(--mode-dark);
     color: var(--text-light);
 }
@@ -48,7 +50,11 @@ body {
     background: var(--theme-dark);
 }
 
-.control__sm-btn:hover,
+.control__main:hover,
+.control__sm-btn:hover {
+    opacity: 0.8;
+}
+
 .control__btn--actived {
     background: #b428cd;
 }

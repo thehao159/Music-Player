@@ -1,0 +1,21 @@
+/* Tablet & Mobile */
+@media (max-width: 1023px) {
+    .control__sm-btn:hover {
+        opacity: 1;
+    }
+}
+/* End Tablet & Mobile */
+
+/* Mobile */
+@media (max-width: 739px) {
+    .main {
+        padding: 2rem 2rem 0;
+        border-radius: 0;
+    }
+
+    .header__song,
+    .header__singer {
+        padding: 0 2rem;
+    }
+}
+/* End Mobile */

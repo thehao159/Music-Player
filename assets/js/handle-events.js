@@ -112,10 +112,10 @@ function handleAudio() {
     // Chuyển btn playing cho bài hát phù hợp ở playlist
     // Lấy thời lượng bài hiện tại render lên dashboard, cho cd về ban đầu
     audio.onloadeddata = () => {
-        const playingBtn = $('.song__btn--playing');
+        const playingSong = $('.song__item--playing');
         
-        if(playingBtn) playingBtn.classList.remove('song__btn--playing');
-        $$('.song__item')[currentIndex].querySelector('.song__btn').classList.add('song__btn--playing');
+        if(playingSong) playingSong.classList.remove('song__item--playing');
+        $$('.song__item')[currentIndex].classList.add('song__item--playing');
         
         spinnerCdAnimation.currentTime = 0;
         
@@ -188,14 +188,17 @@ function handleSlider() {
 }
 
 function handlePlaylist() {
-    // Ấn ngẫu nhiên bài hát nào đó thì sẽ chuyển index của bài đó
+    // Ấn ngẫu nhiên bài hát nào đó
+    // thì sẽ lấy index của bài từ attribute data-index
     // thành currentIndex và render lên dashboard
-    $$('.song__item').forEach((element, index) => {
-        element.addEventListener('click', () => {
-            currentIndex = index;
+    $('.song__list').addEventListener('click', e => {
+        const songClicked = e.target.closest('.song__item:not(.song__item--playing)');
+
+        if(songClicked) {
+            currentIndex = Number(songClicked.dataset.index);
             handleRenderDashboard(currentIndex);
             audio.play();
-        });
+        }
     });
 }
 

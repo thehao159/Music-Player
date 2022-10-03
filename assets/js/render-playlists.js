@@ -1,8 +1,8 @@
 import { getAllSongs } from './get-data.js';
 
 function renderPlaylists() {
-    const html = getAllSongs().map((song) => `
-        <div class="song__item">
+    const html = getAllSongs().map((song, index) => `
+        <div class="song__item" data-index="${index}">
             <div class="song__avatar">
                 <div class="song__avatar-img" style="background-image: url('${song.avatar}');"></div>
             </div>

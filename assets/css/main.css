@@ -12,12 +12,18 @@ header {
 .header__song {
     font-size: 2.4rem;
     line-height: 2.4rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .header__singer {
     padding-top: 6px;
     color: var(--text-blur);
     font-size: 1.4rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 /* End Header */
 
@@ -116,10 +122,6 @@ header {
     background: var(--theme-light);
 }
 
-.control__main:hover {
-    background: #f84e4e;
-}
-
 .control__play-icon {
     display: block;
 }
@@ -159,6 +161,10 @@ header {
     cursor: pointer;
 }
 
+.song__item:active {
+    opacity: 0.8;
+}
+
 .song__item:last-child {
     border-bottom: none;
 }
@@ -179,20 +185,28 @@ header {
 .song__info {
     display: flex;
     flex-direction: column;
-    margin: auto 1.8rem;
+    margin: auto 0;
     width: 74%;
 }
 
 .song__name {
+    padding: 0 1.8rem;
     width: 100%;
     font-size: 1.8rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .song__singer {
     margin-top: 0.4rem;
+    padding: 0 1.8rem;
     width: 100%;
     color: var(--text-blur);
     font-size: 1.4rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .song__status {
@@ -209,7 +223,7 @@ header {
     background-color: #5e5d5d;
 }
 
-.song__btn--playing {
+.song__item--playing .song__btn {
     background-color: var(--theme-light);
 }
 
@@ -224,11 +238,11 @@ header {
     display: none;
 }
 
-.song__btn--playing .song__play-icon {
+.song__item--playing .song__play-icon {
     display: none;
 }
 
-.song__btn--playing .song__pause-icon {
+.song__item--playing .song__pause-icon {
     display: block;
 }
 /* End Playlists */
