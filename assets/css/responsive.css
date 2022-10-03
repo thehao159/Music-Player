@@ -13,8 +13,7 @@
         border-radius: 0;
     }
 
-    .header__song,
-    .header__singer {
+    header {
         padding: 0 2rem;
     }
 }

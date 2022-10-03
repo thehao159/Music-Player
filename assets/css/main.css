@@ -30,6 +30,7 @@ header {
 /* CD */
 .cd {
     display: flex;
+    overflow: hidden;
 }
 
 .cd__outline {
