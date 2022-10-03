@@ -5,7 +5,7 @@ function handleRenderDashboard(index) {
 
     $('.header__song').textContent = song.name;
     $('.header__singer').textContent = song.singer;
-    $('.cd__img').style.backgroundImage = `url('${song.avatar}')`;
+    cdImg.style.backgroundImage = `url('${song.avatar}')`;
     $('#audio').src = song.path;
 }
 

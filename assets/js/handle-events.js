@@ -97,7 +97,7 @@ function handleAudio() {
     let duration = 0;
 
     // Xử lý quay cd
-    const spinnerCdAnimation = cdOutline.animate(
+    const spinnerCdAnimation = cdImg.animate(
         [
             {transform: 'rotate(360deg)'}
         ],
